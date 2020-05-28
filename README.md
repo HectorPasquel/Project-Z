@@ -12,12 +12,12 @@
 	SSH:
 
 	```bash
-	$ git clone git@github.com:HectorPasquel/Project-Z.git
+	 git clone git@github.com:HectorPasquel/Project-Z.git
 	```
 
 	or HTTPS:
 	```bash
-	$ git clone https://github.com/HectorPasquel/Project-Z.git
+	 git clone https://github.com/HectorPasquel/Project-Z.git
 	```
  
  ### Upload changes
