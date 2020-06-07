@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/422426__behansean__jumps-start.wav-6260554d59ab02f5a7602ad1a8cdbb7e.sample"
+
+[deps]
+
+source_file="res://SFX/Player/422426__behansean__jumps-start.wav"
+dest_files=[ "res://.import/422426__behansean__jumps-start.wav-6260554d59ab02f5a7602ad1a8cdbb7e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
