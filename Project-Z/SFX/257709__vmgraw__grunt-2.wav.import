@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/257709__vmgraw__grunt-2.wav-898cd5224b84b2b1c7de1e1585233c36.sample"
+
+[deps]
+
+source_file="res://SFX/257709__vmgraw__grunt-2.wav"
+dest_files=[ "res://.import/257709__vmgraw__grunt-2.wav-898cd5224b84b2b1c7de1e1585233c36.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
