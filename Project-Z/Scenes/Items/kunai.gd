@@ -4,6 +4,7 @@ extends Area2D
 const SPEED = 900
 var velocity = Vector2()
 var direction = 1
+var damage = 2
 
 func _physics_process(delta):
 	velocity.x = SPEED * delta * direction
@@ -22,4 +23,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_kunai_body_entered(body):
+	if "Enemy" in body.name:
+		body.harm(damage)
 	queue_free()

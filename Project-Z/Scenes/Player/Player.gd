@@ -2,10 +2,10 @@ extends KinematicBody2D
 
 var motion = Vector2()
 
-const SPEED = 700
+const SPEED = 900
 const GRAVITY = 60
 const UP = Vector2(0,-1)
-const JUMP_SPEED = -1000
+const JUMP_SPEED = -1200
 const KUNAI = preload("res://Scenes/Items/kunai.tscn")
 
 var jump_count = 0
@@ -15,6 +15,9 @@ var jumping = false
 var wall_jumping = false
 var throwing = false
 var flashing = false
+var damage = 3
+var health = 80
+var is_hurted = true
 
 #var wall_direction = 1
 #
@@ -38,8 +41,9 @@ func _physics_process(delta):
 	lunge()
 	move_and_slide(motion, UP)
 #	print (jump_count)
-	print (motion.y)
+#	print (motion.y)
 #	test()
+	harmed()
 	
 func apply_gravity():
 #	if position.y > WORLD_LIMIT:
@@ -83,18 +87,21 @@ func Move():
 		else:
 			motion.x = -SPEED
 
-			
+		
 		if sign ($Position2D.position.x) == 1 and $Animations.flip_h == true:
 			$Position2D.position.x *= -1
+			$AtackArea/CollisionShape2D.position.x *= -1
 		
 	elif Input.is_action_pressed("right") and Input.is_action_pressed("left") == false:
 		if attacking == true and motion.y >= 0 and motion.y <= 60:
 			motion.x = 0
 		else:
 			motion.x = SPEED
-			
+		
+		
 		if sign ($Position2D.position.x) == -1 and $Animations.flip_h == false:
 			$Position2D.position.x *= -1
+			$AtackArea/CollisionShape2D.position.x *= -1	
 	else:
 		motion.x = 0
 		
@@ -106,8 +113,11 @@ func slash():
 				motion.x = 0
 			attacking = true
 			$Animations.play("attack")
+			$AtackArea/CollisionShape2D.disabled = false
+			$TimerSlash.start()
 			$Slash.play()
 			$Timer.start()
+			
 			timeout = true
 		
 		
@@ -171,8 +181,8 @@ func animate():
 			
 func wall_jump():
 	if left_wall.is_colliding() == true and jumping == true and Input.is_action_pressed("left"): 
-		if motion.y < -200 or motion.y > 10:
-			if motion.x == -700:
+		if motion.y < -800 or motion.y > 200:
+			if motion.x == -900:
 				wall_jumping = true
 				motion.x = 0
 				motion.y = 300
@@ -182,8 +192,8 @@ func wall_jump():
 				jump_count = 0
 		#		print ("left")
 	if right_wall.is_colliding() == true and jumping == true and Input.is_action_pressed("right"):
-		if motion.y < -200 or motion.y > 10:
-			if motion.x == 700:
+		if motion.y < -800 or motion.y > 200:
+			if motion.x == 900:
 				wall_jumping = true
 				motion.x = 0
 				motion.y = 300
@@ -191,12 +201,42 @@ func wall_jump():
 				$Animations.play("wall_jump")
 				jump_count = 0
 		#		print ("right")
-	elif right_wall.is_colliding() == false and left_wall.is_colliding() == false and not Input.is_action_pressed("right") and not Input.is_action_pressed("left"):
+	elif right_wall.is_colliding() == false and left_wall.is_colliding() == false:
 		wall_jumping = false
-	print (wall_jumping)
+		
+	elif not Input.is_action_pressed("right") and not Input.is_action_pressed("left"):
+		wall_jumping = false
+		
+#	print (wall_jumping)
+
+func harm(damage):
+	health = health - damage
+	is_hurted = true
+	motion.x = 0  
+#	$hurt.start()
+#	$AnimatedSprite.play("dying")
+	if health < 1:
+		pass
+#		dead()
+
+#func dead():
+#
+#
+#	motion = Vector2(0,0)
+#	$AnimatedSprite.play("dying")
+#
+#	$Dying.start()
+
+
+func harmed():
+	if Input.is_action_just_pressed("harm"):
+		health -= 10
+
 
 
 func _on_Animations_animation_finished():
+	
+		
 	attacking = false
 	throwing = false
 	flashing = false
@@ -204,3 +244,13 @@ func _on_Animations_animation_finished():
 
 func _on_Timer_timeout():
 	timeout = false
+
+
+func _on_TimerSlash_timeout():
+	$AtackArea/CollisionShape2D.disabled = true
+
+
+
+func _on_AtackArea_body_entered(body):
+	if "Enemy" in body.name:
+		body.harm(damage)
