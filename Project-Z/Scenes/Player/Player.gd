@@ -16,8 +16,9 @@ var wall_jumping = false
 var throwing = false
 var flashing = false
 var damage = 3
-var health = 80
-var is_hurted = true
+var health = 8000
+var is_hurted = false
+var dead = false
 
 #var wall_direction = 1
 #
@@ -30,20 +31,23 @@ func _ready():
 	
 	
 func _physics_process(delta):
-	apply_gravity()
-	Jump()
-	wall_jump()
-	animate()
-	Move()
-	slash()
-	throw_kunai()
-#	is_throwing()
-	lunge()
-	move_and_slide(motion, UP)
+	if dead == false:
+		apply_gravity()
+		Jump()
+		wall_jump()
+		animate()
+		Move()
+		slash()
+		throw_kunai()
+	#	is_throwing()
+		lunge()
+		move_and_slide(motion, UP)
+		
+	
 #	print (jump_count)
 #	print (motion.y)
 #	test()
-	harmed()
+#	harmed()
 	
 func apply_gravity():
 #	if position.y > WORLD_LIMIT:
@@ -163,19 +167,19 @@ func lunge():
 		
 		
 func animate():
-	if motion.y < 0 and attacking == false and wall_jumping == false and throwing == false and flashing == false:
+	if motion.y < 0 and attacking == false and wall_jumping == false and throwing == false and flashing == false and is_hurted == false:
 		$Animations.play("jump")
-	elif motion.y > 100 and attacking == false and wall_jumping == false and throwing == false and flashing == false: 
+	elif motion.y > 100 and attacking == false and wall_jumping == false and throwing == false and flashing == false and is_hurted == false: 
 		$Animations.play("fall")
-	elif motion.x > 1 and attacking == false and wall_jumping == false and throwing == false and flashing == false:
+	elif motion.x > 1 and attacking == false and wall_jumping == false and throwing == false and flashing == false and is_hurted == false:
 		$Animations.flip_h = false
 		$Animations.play("walk")
-	elif motion.x < -1 and attacking == false and wall_jumping == false and throwing == false and flashing == false:
+	elif motion.x < -1 and attacking == false and wall_jumping == false and throwing == false and flashing == false and is_hurted == false:
 		$Animations.flip_h = true
 		$Animations.play ("walk")
 #	elif motion.y == 60 and wall_jumping == true:
 #		$Animations.play("wall_jump")
-	elif attacking == false and wall_jumping == false and throwing == false and flashing == false:
+	elif attacking == false and wall_jumping == false and throwing == false and flashing == false and is_hurted == false:
 		$Animations.play("idle")
 					
 			
@@ -212,25 +216,29 @@ func wall_jump():
 func harm(damage):
 	health = health - damage
 	is_hurted = true
-	motion.x = 0  
+	position.y -= 1
+	motion.y = -500
 #	$hurt.start()
-#	$AnimatedSprite.play("dying")
+	$Animations.play("hurted")
 	if health < 1:
-		pass
-#		dead()
+		
+		
+		dead()
 
-#func dead():
-#
-#
-#	motion = Vector2(0,0)
-#	$AnimatedSprite.play("dying")
-#
+func dead():
+
+	dead = true
+	motion = Vector2(0,0)
+	$Animations.play("dying")
+	$Animations.play("dead")
+	$CollisionPlayer.disabled = true
+
 #	$Dying.start()
 
 
-func harmed():
-	if Input.is_action_just_pressed("harm"):
-		health -= 10
+#func harmed(damage):
+#	if Input.is_action_just_pressed("harm"):
+#		health -= damage
 
 
 
@@ -240,6 +248,7 @@ func _on_Animations_animation_finished():
 	attacking = false
 	throwing = false
 	flashing = false
+	is_hurted = false
 
 
 func _on_Timer_timeout():
@@ -253,4 +262,6 @@ func _on_TimerSlash_timeout():
 
 func _on_AtackArea_body_entered(body):
 	if "Enemy" in body.name:
+		body.harm(damage)
+	elif "Rastrillo" in body.name:
 		body.harm(damage)

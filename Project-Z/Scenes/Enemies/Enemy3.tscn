@@ -1,0 +1,132 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_08.png" type="Texture" id=1]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_01.png" type="Texture" id=2]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_02.png" type="Texture" id=3]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_03.png" type="Texture" id=4]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_04.png" type="Texture" id=5]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_05.png" type="Texture" id=6]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_06.png" type="Texture" id=7]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_00.png" type="Texture" id=8]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_13.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Enemies/Enemy3.gd" type="Script" id=10]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_12.png" type="Texture" id=11]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_11.png" type="Texture" id=12]
+[ext_resource path="res://SFX/257709__vmgraw__grunt-2.wav" type="AudioStream" id=13]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_15.png" type="Texture" id=14]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_10.png" type="Texture" id=15]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_14.png" type="Texture" id=16]
+[ext_resource path="res://GFX/Enemies/masked enemy lance/sprite_09.png" type="Texture" id=17]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 15 ), ExtResource( 1 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "attack",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "dying",
+"speed": 9.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 40.1222, 67.3632 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 37.0171, 17.3818 )
+
+[node name="Enemy3" type="KinematicBody2D"]
+position = Vector2( 0, -1.58112 )
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.270538, 0.475647 )
+frames = SubResource( 1 )
+animation = "attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -17.7651, 39.2301 )
+shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 19.8864, 98.9539 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 2
+
+[node name="Vanish" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Dying" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="grunt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+
+[node name="hurt" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="AtackArea" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AtackArea"]
+position = Vector2( 86.5683, 19.1737 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="attacking" type="Timer" parent="."]
+wait_time = 0.8
+
+[node name="viewR" type="RayCast2D" parent="."]
+position = Vector2( 14, 26 )
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 70 )
+
+[node name="viewL" type="RayCast2D" parent="."]
+position = Vector2( -14, 26 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 70 )
+
+[node name="collisionA" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="delay" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="Vanish" to="." method="_on_Vanish_timeout"]
+[connection signal="timeout" from="Dying" to="." method="_on_Dying_timeout"]
+[connection signal="timeout" from="hurt" to="." method="_on_hurt_timeout"]
+[connection signal="body_entered" from="AtackArea" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="attacking" to="." method="_on_attacking_timeout"]
+[connection signal="timeout" from="collisionA" to="." method="_on_collisionA_timeout"]
+[connection signal="timeout" from="delay" to="." method="_on_delay_timeout"]

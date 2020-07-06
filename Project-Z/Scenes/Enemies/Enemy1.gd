@@ -3,16 +3,17 @@ extends KinematicBody2D
 var motion = Vector2()
 
 const GRAVITY = 60
-const SPEED = 300
+const SPEED = 200
 const UP = Vector2(0,-1)
 
 var is_dead = false
 var is_hurted = false
 var direction = 1 
 #1 == right 
-var health = 10
+var health = 12
 var timeout = false
 var attacking = false
+var damageSword = 25
 
 func _ready():
 	pass 
@@ -83,18 +84,88 @@ func harm(damage):
 		
 func slash():
 #	if Input.is_action_just_pressed("harm"):
-	if $viewR.is_colliding() == true:
-		if not timeout:
-			attacking = true
-			motion.x = 0
-			$AnimatedSprite.play("attack")
-			$AtackArea/CollisionShape2D.disabled = false
-			$attacking.start()
-			
+	if is_dead == false:
+		if is_hurted == false:
+			if direction == 1 and $viewR.is_colliding() == true:
+				if not timeout:
+					attacking = true
+					motion.x = 0
+					$AnimatedSprite.play("attack")
+					
+					$attacking.start()
+					$collisionA.start()
+					$delay.start()
+					
+						
+					timeout = true
+					
+#					$AtackArea/CollisionShape2D.disabled = false
 				
-			timeout = true
-	else:
-		pass
+			elif direction == 1 and $viewL.is_colliding() == true:
+				$AnimatedSprite.flip_h = true
+				$AtackArea/CollisionShape2D.position.x *= -1
+				direction = direction * -1
+				motion.x = 1
+				if not timeout:
+					attacking = true
+					motion.x = 0
+					$AnimatedSprite.play("attack")
+					
+					$attacking.start()
+					$collisionA.start()
+					$delay.start()
+					
+						
+					timeout = true
+					
+#					$AtackArea/CollisionShape2D.disabled = false
+				
+			elif direction == -1 and $viewR.is_colliding() == true:
+				$AnimatedSprite.flip_h = false
+				$AtackArea/CollisionShape2D.position.x *= -1
+				direction = direction * -1
+				motion.x = -1
+				if not timeout:
+					attacking = true
+					motion.x = 0
+					$AnimatedSprite.play("attack")
+					
+					$attacking.start()
+					$collisionA.start()
+					$delay.start()
+						
+					timeout = true
+					
+#					$AtackArea/CollisionShape2D.disabled = false
+				
+			elif direction == -1 and $viewL.is_colliding() == true:
+				if not timeout:
+					attacking = true
+					motion.x = 0
+					$AnimatedSprite.play("attack")
+					
+					$attacking.start()
+					$collisionA.start()
+					$delay.start()
+						
+					timeout = true
+					
+#					$AtackArea/CollisionShape2D.disabled = false
+		
+				
+				
+		#	if $viewR.is_colliding() == true or $viewL.is_colliding() == true:
+		#		if not timeout:
+		#			attacking = true
+		#			motion.x = 0
+		#			$AnimatedSprite.play("attack")
+		#			$AtackArea/CollisionShape2D.disabled = false
+		#			$attacking.start()
+		#
+		#
+		#			timeout = true
+		#	else:
+		#		pass
 
 
 
@@ -113,13 +184,23 @@ func _on_hurt_timeout():
 
 
 func _on_Area2D_body_entered(body):
-	pass # Replace with function body.
+	if "Player" in body.name:
+		body.harm(damageSword)
 
 
 func _on_attacking_timeout():
 	timeout = false
-	$AtackArea/CollisionShape2D.disabled = true
+	
 
 
 func _on_AnimatedSprite_animation_finished():
 	attacking = false
+
+
+func _on_collisionA_timeout():
+	$AtackArea/CollisionShape2D.disabled = true
+
+
+func _on_delay_timeout():
+	$AtackArea/CollisionShape2D.disabled = false
+	

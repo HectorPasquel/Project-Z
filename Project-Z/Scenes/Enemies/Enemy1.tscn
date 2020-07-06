@@ -21,11 +21,6 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "attack",
-"speed": 9.0
-}, {
 "frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 4 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "walk",
@@ -35,6 +30,11 @@ animations = [ {
 "loop": true,
 "name": "dead",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "attack",
+"speed": 9.0
 }, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
@@ -46,7 +46,7 @@ animations = [ {
 extents = Vector2( 36.005, 69.9282 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 48.1465, 91.1669 )
+extents = Vector2( 53.1098, 69.8481 )
 
 [node name="Enemy1" type="KinematicBody2D"]
 collision_layer = 4
@@ -86,29 +86,39 @@ wait_time = 0.2
 one_shot = true
 
 [node name="AtackArea" type="Area2D" parent="."]
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AtackArea"]
-position = Vector2( 47.0356, 14.988 )
+position = Vector2( 13.9904, 5.47501 )
 shape = SubResource( 3 )
 disabled = true
 
 [node name="attacking" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.8
 
 [node name="viewR" type="RayCast2D" parent="."]
 position = Vector2( 14, 26 )
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( 0, 80 )
+cast_to = Vector2( 0, 70 )
 
 [node name="viewL" type="RayCast2D" parent="."]
 position = Vector2( -14, 26 )
 rotation = 1.5708
 enabled = true
-cast_to = Vector2( 0, 80 )
+cast_to = Vector2( 0, 70 )
+
+[node name="collisionA" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="delay" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="Vanish" to="." method="_on_Vanish_timeout"]
 [connection signal="timeout" from="Dying" to="." method="_on_Dying_timeout"]
 [connection signal="timeout" from="hurt" to="." method="_on_hurt_timeout"]
 [connection signal="body_entered" from="AtackArea" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="attacking" to="." method="_on_attacking_timeout"]
+[connection signal="timeout" from="collisionA" to="." method="_on_collisionA_timeout"]
+[connection signal="timeout" from="delay" to="." method="_on_delay_timeout"]
