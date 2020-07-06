@@ -15,7 +15,7 @@ func set_kunai_direction(dir):
 	direction = dir
 	print (direction)
 	if dir == -1:
-		$Sprite.flip_v = true	
+		$Sprite2.flip_h = true
 		
 			
 func _on_VisibilityNotifier2D_screen_exited():
@@ -23,6 +23,14 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_kunai_body_entered(body):
-	if "Enemy" in body.name:
+	if "Enemy1" in body.name:
+		body.harm(damage)
+	elif "Enemy2" in body.name:
+		body.harm(damage)
+	elif "Enemy3" in body.name:
+		body.harm(damage)
+	elif "Enemy4" in body.name:
+		body.harm(damage)
+	elif "Player" in body.name:
 		body.harm(damage)
 	queue_free()

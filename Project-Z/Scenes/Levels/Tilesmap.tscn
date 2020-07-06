@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://GFX/Environment/sprite_grass0.png" type="Texture" id=1]
-[ext_resource path="res://GFX/Environment/sprite_grass1.png" type="Texture" id=2]
-[ext_resource path="res://GFX/Environment/Grass (4)/sprite_3.png" type="Texture" id=3]
-[ext_resource path="res://GFX/Environment/Grass (4)/sprite_1.png" type="Texture" id=4]
-[ext_resource path="res://GFX/Environment/Grass (4)/sprite_0.png" type="Texture" id=5]
-[ext_resource path="res://GFX/Environment/Grass (4)/sprite_2.png" type="Texture" id=6]
-[ext_resource path="res://GFX/Environment/Grass (4)/sprite_4.png" type="Texture" id=7]
-[ext_resource path="res://GFX/Environment/Grass (4)/sprite_5.png" type="Texture" id=8]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_02.png" type="Texture" id=1]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_03.png" type="Texture" id=2]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_04.png" type="Texture" id=3]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_01.png" type="Texture" id=4]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_05.png" type="Texture" id=5]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_06.png" type="Texture" id=6]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_08.png" type="Texture" id=7]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_09.png" type="Texture" id=8]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_07.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.9717, 32.0192 )
@@ -16,7 +17,7 @@ extents = Vector2( 31.9717, 32.0192 )
 
 [node name="Grass" type="Sprite" parent="."]
 position = Vector2( 57.3986, -26.1992 )
-texture = ExtResource( 1 )
+texture = ExtResource( 4 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Grass"]
 collision_layer = 2
@@ -26,7 +27,7 @@ shape = SubResource( 1 )
 
 [node name="Dirt" type="Sprite" parent="."]
 position = Vector2( 211.481, -50.3973 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Dirt"]
 collision_layer = 2
@@ -36,7 +37,7 @@ shape = SubResource( 1 )
 
 [node name="Grass1" type="Sprite" parent="."]
 position = Vector2( -90.7077, 0 )
-texture = ExtResource( 5 )
+texture = ExtResource( 2 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Grass1"]
 collision_layer = 2
@@ -46,55 +47,60 @@ shape = SubResource( 1 )
 
 [node name="Grass2" type="Sprite" parent="."]
 position = Vector2( -88.7216, 90.565 )
-texture = ExtResource( 6 )
+texture = ExtResource( 3 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Grass2"]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grass2/StaticBody2D3"]
-position = Vector2( 0.568817, 0 )
 shape = SubResource( 1 )
 
 [node name="Grass3" type="Sprite" parent="."]
 position = Vector2( 17.0754, 91.1338 )
-texture = ExtResource( 7 )
+texture = ExtResource( 5 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Grass3"]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grass3/StaticBody2D3"]
-position = Vector2( 0.568817, 0 )
 shape = SubResource( 1 )
 
 [node name="Dirt1" type="Sprite" parent="."]
 position = Vector2( 101.827, 88.2898 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Dirt1"]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt1/StaticBody2D3"]
-position = Vector2( 0.568817, 0 )
 shape = SubResource( 1 )
 
 [node name="Dirt2" type="Sprite" parent="."]
 position = Vector2( 191.128, 84.3082 )
-texture = ExtResource( 3 )
+texture = ExtResource( 9 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Dirt2"]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt2/StaticBody2D3"]
-position = Vector2( 0.568817, 0 )
 shape = SubResource( 1 )
 
 [node name="Dirt3" type="Sprite" parent="."]
 position = Vector2( 280.43, 93.9778 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Dirt3"]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt3/StaticBody2D3"]
-position = Vector2( 0.568817, 0 )
+shape = SubResource( 1 )
+
+[node name="Dirt4" type="Sprite" parent="."]
+position = Vector2( 382.985, 74.2446 )
+texture = ExtResource( 8 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt4"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt4/StaticBody2D3"]
 shape = SubResource( 1 )
