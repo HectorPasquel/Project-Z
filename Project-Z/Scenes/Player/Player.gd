@@ -16,10 +16,10 @@ var wall_jumping = false
 var throwing = false
 var flashing = false
 var damage = 3
-var health = 8000
+var health = 100
 var is_hurted = false
 var dead = false
-
+var running = false
 #var wall_direction = 1
 #
 onready var left_wall = $WallRaycast/LeftCast
@@ -65,16 +65,19 @@ func Jump():
 		jumping = true
 		jump_count += 1
 		motion.y = JUMP_SPEED
+		$Jump.play()
 	
 	elif  Input.is_action_just_pressed("jump") and jump_count < 2 and Input.is_action_pressed("right") and Input.is_action_pressed("left") == false:
 		jumping = true
 		jump_count += 1
 		motion.y = JUMP_SPEED
+		$Jump.play()
 	
 	elif Input.is_action_just_pressed("jump") and jump_count < 2 and Input.is_action_pressed("left") and Input.is_action_pressed("right") == false:
 		jumping = true
 		jump_count += 1
 		motion.y = JUMP_SPEED
+		$Jump.play()
 		
 	elif is_on_floor():
 		jumping = false
@@ -90,6 +93,9 @@ func Move():
 			motion.x = 0
 		else:
 			motion.x = -SPEED
+			if running == false and jumping == false:
+				$run.play()
+				running = true
 
 		
 		if sign ($Position2D.position.x) == 1 and $Animations.flip_h == true:
@@ -101,6 +107,9 @@ func Move():
 			motion.x = 0
 		else:
 			motion.x = SPEED
+			if running == false and jumping == false:
+				$run.play()
+				running = true
 		
 		
 		if sign ($Position2D.position.x) == -1 and $Animations.flip_h == false:
@@ -214,24 +223,29 @@ func wall_jump():
 #	print (wall_jumping)
 
 func harm(damage):
-	health = health - damage
-	is_hurted = true
-	position.y -= 1
-	motion.y = -500
-#	$hurt.start()
-	$Animations.play("hurted")
-	if health < 1:
-		
-		
-		dead()
+	if dead == false:
+		health = health - damage
+		is_hurted = true
+		position.y -= 1
+		motion.y = -500
+	#	$hurt.start()
+		$SFX/HurtGrunt.play()
+		$Animations.play("hurted")
+		if health < 1:
+			
+			
+			dead()
 
 func dead():
 
 	dead = true
 	motion = Vector2(0,0)
 	$Animations.play("dying")
+	$SFX/DeathGrunt.play()
 	$Animations.play("dead")
 	$CollisionPlayer.disabled = true
+	$TimerToMenu.start()
+	
 
 #	$Dying.start()
 
@@ -265,3 +279,11 @@ func _on_AtackArea_body_entered(body):
 		body.harm(damage)
 	elif "Rastrillo" in body.name:
 		body.harm(damage)
+
+
+func _on_run_finished():
+	running = false
+
+
+func _on_TimerToMenu_timeout():
+	get_tree().change_scene("res://Scenes/GUI/Restart.tscn")

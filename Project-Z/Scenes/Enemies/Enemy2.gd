@@ -3,7 +3,7 @@ extends KinematicBody2D
 var motion = Vector2()
 
 const GRAVITY = 60
-const SPEED = 300
+const SPEED = 200
 const UP = Vector2(0,-1)
 
 var is_dead = false
@@ -86,6 +86,9 @@ func slash():
 	if is_dead == false:
 		if is_hurted == false:
 			if direction == 1 and $viewR.is_colliding() == true:
+				motion.x = 0
+				if attacking == false:
+					$AnimatedSprite.play("idle")
 				if not timeout:
 					attacking = true
 					motion.x = 0
@@ -101,10 +104,13 @@ func slash():
 #					$AtackArea/CollisionShape2D.disabled = false
 				
 			elif direction == 1 and $viewL.is_colliding() == true:
+				
 				$AnimatedSprite.flip_h = true
 				$AtackArea/CollisionShape2D.position.x *= -1
 				direction = direction * -1
-				motion.x = 1
+				motion.x = 0
+				if attacking == false:
+					$AnimatedSprite.play("idle")
 				if not timeout:
 					attacking = true
 					motion.x = 0
@@ -123,7 +129,9 @@ func slash():
 				$AnimatedSprite.flip_h = false
 				$AtackArea/CollisionShape2D.position.x *= -1
 				direction = direction * -1
-				motion.x = -1
+				motion.x = 0
+				if attacking == false:
+					$AnimatedSprite.play("idle")
 				if not timeout:
 					attacking = true
 					motion.x = 0
@@ -138,6 +146,9 @@ func slash():
 #					$AtackArea/CollisionShape2D.disabled = false
 				
 			elif direction == -1 and $viewL.is_colliding() == true:
+				motion.x = 0
+				if attacking == false:
+					$AnimatedSprite.play("idle")
 				if not timeout:
 					attacking = true
 					motion.x = 0

@@ -14,6 +14,7 @@ var health = 9
 var timeout = false
 var attacking = false
 var damageSword = 25
+var delayK = false
 
 const KUNAI = preload("res://Scenes/Items/kunai.tscn")
 
@@ -43,8 +44,9 @@ func walk():
 				if is_on_wall():
 					direction = direction * -1
 					$RayCast2D.position.x *= -1
-					$Position2D.position.x *= -1
+					
 					$CollisionShape2D.position.x *= -1
+#					$Position2D.position.x *= -1
 				motion.x = SPEED * direction
 				if direction == 1:
 					$AnimatedSprite.play("walk")
@@ -55,8 +57,8 @@ func walk():
 				if $RayCast2D.is_colliding() == false:
 					direction = direction * -1
 					$RayCast2D.position.x *= -1
-					$Position2D.position.x *= -1
 					$CollisionShape2D.position.x *= -1
+#					$Position2D.position.x *= -1
 
 func dead():
 	
@@ -83,70 +85,132 @@ func harm(damage):
 	if health < 1:
 		dead()
 
-func throwKunai():
-	
-	var kunai = KUNAI.instance()
-	if sign($Position2D.position.x) == 1:
-		kunai.set_kunai_direction(1)
-	else:
-		kunai.set_kunai_direction(-1)
-	get_parent().add_child(kunai)
-	kunai.position = $Position2D.global_position
-		
+#func throwKunai():
+#
+#	var kunai = KUNAI.instance()
+#	if sign($Position2D.position.x) == 1:
+#		kunai.set_kunai_direction(1)
+#	else:
+#		kunai.set_kunai_direction(-1)
+#	get_parent().add_child(kunai)
+#	kunai.position = $Position2D.global_position
+#
 func slash():
 #	if Input.is_action_just_pressed("harm"):
 	if is_dead == false:
 		if is_hurted == false:
+			
 			if direction == 1 and $viewR.is_colliding() == true:
+				$Position2D.position.x = 100
+				motion.x = 0
+				var kunai = KUNAI.instance()
+				kunai.set_kunai_direction(1)
+				
+				if attacking == false:
+					$AnimatedSprite.play("idle")
+			
 				if not timeout:
+					
 					attacking = true	
 					motion.x = 0
 					$AnimatedSprite.play("attack")
 					$attacking.start()
-					throwKunai()
+	#				throwKunai()
+	
+						
+					get_parent().add_child(kunai)
+					kunai.position = $Position2D.global_position
+						
+						
 					timeout = true
 					
 #					
 				
 			elif direction == 1 and $viewL.is_colliding() == true:
+				$Position2D.position.x = -120
 				$AnimatedSprite.flip_h = true
 #				$AtackArea/CollisionShape2D.position.x *= -1
 				direction = direction * -1
-				motion.x = 1
-				if not timeout:
-					attacking = true
-					motion.x = 0
-					$attacking.start()
-					$AnimatedSprite.play("attack")
-					throwKunai()
-					timeout = true
+				motion.x = 0
+				var kunai = KUNAI.instance()
+				kunai.set_kunai_direction(1)
+				if attacking == false:
+					$AnimatedSprite.play("idle")
+#				$delay.start()
+#				delayK = true
+#				if not timeout:
+#					if delayK == false:
+#						attacking = true
+#						motion.x = 0
+#						$attacking.start()
+#						$AnimatedSprite.play("attack")
+#	#					throwKunai()
+#
+#						get_parent().add_child(kunai)
+#						kunai.position = $Position2D.global_position
+#
+#
+#
+#
+#						timeout = true
 					
 #					
 				
 			elif direction == -1 and $viewR.is_colliding() == true:
+				$Position2D.position.x = 100
 				$AnimatedSprite.flip_h = false
 #				$AtackArea/CollisionShape2D.position.x *= -1
 				direction = direction * -1
-				motion.x = 1
-				if not timeout:
-					attacking = true
-					motion.x = 0
-					$AnimatedSprite.play("attack")
-					$attacking.start()
-					throwKunai()
-					timeout = true
-					
+				motion.x = 0
+				var kunai = KUNAI.instance()
+				kunai.set_kunai_direction(-1)
+				if attacking == false:
+					$AnimatedSprite.play("idle")
+#				$delay.start()
+#				delayK = true
+#				if not timeout:
+#					if delayK == false:
+#						attacking = true
+#						motion.x = 0
+#						$AnimatedSprite.play("attack")
+#						$attacking.start()
+#	#					throwKunai()
+#
+#
+#						get_parent().add_child(kunai)
+#						kunai.position = $Position2D.global_position
+#
+#
+#
+#
+#						timeout = true
+						
 #				
 				
 			elif direction == -1 and $viewL.is_colliding() == true:
+				motion.x = 0
+				$Position2D.position.x = -120
+				var kunai = KUNAI.instance()
+				kunai.set_kunai_direction(-1)
+				if attacking == false:
+					$AnimatedSprite.play("idle")
+	
 				if not timeout:
+					
 					attacking = true
 					motion.x = 0
 					$AnimatedSprite.play("attack")
 					$attacking.start()
-					throwKunai()
+	#				throwKunai()
+						
+						
+					get_parent().add_child(kunai)
+					kunai.position = $Position2D.global_position
+						
+						
+						
 					timeout = true
-					
+						
 #					
 
 
@@ -177,3 +241,7 @@ func _on_attacking_timeout():
 
 func _on_AnimatedSprite_animation_finished():
 	attacking = false
+
+
+func _on_delay_timeout():
+	delayK = false
