@@ -21,16 +21,6 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 4 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "walk",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": true,
-"name": "dead",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "attack",
@@ -40,6 +30,16 @@ animations = [ {
 "loop": true,
 "name": "dying",
 "speed": 2.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -57,7 +57,6 @@ script = ExtResource( 10 )
 position = Vector2( 0.270538, 0 )
 frames = SubResource( 1 )
 animation = "attack"
-frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -100,13 +99,13 @@ wait_time = 0.8
 position = Vector2( 14, 26 )
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( 0, 70 )
+cast_to = Vector2( 0, 45 )
 
 [node name="viewL" type="RayCast2D" parent="."]
 position = Vector2( -14, 26 )
 rotation = 1.5708
 enabled = true
-cast_to = Vector2( 0, 70 )
+cast_to = Vector2( 0, 45 )
 
 [node name="collisionA" type="Timer" parent="."]
 wait_time = 0.2

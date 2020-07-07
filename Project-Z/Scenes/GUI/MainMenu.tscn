@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GFX/Background/Menus/sprite_0.png" type="Texture" id=1]
 [ext_resource path="res://GFX/Environment/buildings (1)/sprite_4.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://GFX/Items/sprite_0.png" type="Texture" id=4]
 [ext_resource path="res://fonts/Japonesa.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scenes/GUI/MainMenu.gd" type="Script" id=6]
+[ext_resource path="res://SFX/Ishikari Lore.wav" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 250
@@ -194,5 +195,11 @@ text = "Exit "
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -27.262
+autoplay = true
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer4/Exit" to="." method="_on_Exit_pressed"]

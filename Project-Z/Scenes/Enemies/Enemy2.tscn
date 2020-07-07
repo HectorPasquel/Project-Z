@@ -25,24 +25,9 @@ animations = [ {
 "name": "idle",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 14 ) ],
+"frames": [ ExtResource( 17 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 16 ) ],
 "loop": true,
-"name": "growl",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "walk",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 18 ) ],
-"loop": true,
-"name": "hurt",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "dead",
+"name": "run",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 8 ) ],
@@ -55,9 +40,24 @@ animations = [ {
 "name": "dying",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 17 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "run",
+"name": "walk",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "growl",
 "speed": 5.0
 } ]
 
@@ -112,19 +112,18 @@ shape = SubResource( 3 )
 disabled = true
 
 [node name="attacking" type="Timer" parent="."]
-wait_time = 0.8
 
 [node name="viewR" type="RayCast2D" parent="."]
 position = Vector2( 14, 26 )
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( 0, 90 )
+cast_to = Vector2( 0, 70 )
 
 [node name="viewL" type="RayCast2D" parent="."]
 position = Vector2( -14, 26 )
 rotation = 1.5708
 enabled = true
-cast_to = Vector2( 0, 90 )
+cast_to = Vector2( 0, 70 )
 
 [node name="collisionA" type="Timer" parent="."]
 wait_time = 0.2
