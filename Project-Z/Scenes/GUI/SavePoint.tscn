@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/GUI/SavePoint.gd" type="Script" id=1]
+[ext_resource path="res://GFX/Items/check/sprite_0.png" type="Texture" id=2]
+[ext_resource path="res://GFX/Items/check/sprite_1.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 37.3141, 60.9992 )
+
+[node name="SavePoint" type="Area2D"]
+collision_layer = 8
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 482.079, 283.437 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 482, 290 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 482, 290 )
+texture = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Saving" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="body_entered" from="." to="." method="_on_SavePoint_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Saving" to="." method="_on_Saving_timeout"]

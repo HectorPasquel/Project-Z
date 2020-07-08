@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Enemy1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://GFX/HUD/HealthBarv2/sprite_health2.png" type="Texture" id=28]
 [ext_resource path="res://Scenes/Levels/TestRoom.gd" type="Script" id=29]
 [ext_resource path="res://Scenes/GUI/MiniMap.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/GUI/SavePoint.tscn" type="PackedScene" id=31]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.2109, 111.819 )
@@ -237,6 +238,12 @@ visible = false
 
 [node name="MiniMap" parent="CanvasLayer2" instance=ExtResource( 30 )]
 visible = false
+
+[node name="SavePoint" parent="." instance=ExtResource( 31 )]
+position = Vector2( 7321.37, 312.222 )
+
+[node name="SavePoint2" parent="." instance=ExtResource( 31 )]
+position = Vector2( 8785.12, 317.663 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )

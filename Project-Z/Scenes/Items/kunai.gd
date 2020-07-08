@@ -13,7 +13,7 @@ func _physics_process(delta):
 	
 func set_kunai_direction(dir):
 	direction = dir
-	print (direction)
+#	print (direction)
 	if dir == -1:
 		$Sprite2.flip_h = true
 		

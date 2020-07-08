@@ -26,7 +26,7 @@ func _physics_process(delta):
 	move_and_slide(motion, UP)
 	walk()
 	slash()
-	print (direction)
+#	print (direction)
 	
 func apply_gravity():
 	if is_dead == false:

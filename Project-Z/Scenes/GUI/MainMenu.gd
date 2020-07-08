@@ -18,10 +18,25 @@ func _physics_process(delta):
 		$VBoxContainer/HBoxContainer4/Exit.grab_focus()
 
 
+#var save_path = "user://save.dat"
+#func saveData():
+#	var data = {
+#		"max_health" : 100,
+#
+#	}
+#	var file = File.new()
+#	var error = file.open(save_path, File.WRITE)
+#	if error == OK:
+#		file.store_var(data)
+#		file.close()
+
 
 
 func _on_TextureButton_pressed():
 	get_tree().change_scene("res://Scenes/Levels/TestRoom.tscn")
+	GameData.update_mana(-1)
+	GameData.update_position(-1, -1)
+#	GameData.position_player()
 
 
 func _on_Exit_pressed():
@@ -30,3 +45,9 @@ func _on_Exit_pressed():
 
 func _on_Credits_pressed():
 	get_tree().change_scene("res://Scenes/GUI/Credits.tscn")
+
+
+func _on_Continue_pressed():
+	get_tree().change_scene("res://Scenes/Levels/TestRoom.tscn")
+	GameData.load_data()
+#	GameData.position_player()

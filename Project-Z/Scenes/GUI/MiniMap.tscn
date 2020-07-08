@@ -42,6 +42,7 @@ __meta__ = {
 }
 
 [node name="ColorRect1" type="ColorRect" parent="."]
+visible = false
 margin_left = 345.166
 margin_top = 301.424
 margin_right = 449.166
@@ -52,6 +53,7 @@ __meta__ = {
 }
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
 margin_left = 503.868
 margin_top = 299.507
 margin_right = 578.868
