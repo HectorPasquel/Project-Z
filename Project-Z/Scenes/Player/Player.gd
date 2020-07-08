@@ -16,18 +16,26 @@ var wall_jumping = false
 var throwing = false
 var flashing = false
 var damage = 3
+var max_health = 100
 var health = 100
 var is_hurted = false
 var dead = false
 var running = false
+var newX = 1
+var newY = 1
 #var wall_direction = 1
 #
 onready var left_wall = $WallRaycast/LeftCast
 onready var right_wall = $WallRaycast/RightCast
 
 
+var mana = 0
+
 func _ready():
-	pass
+	add_to_group("Player")
+	GameData.position_player()
+#	
+
 	
 	
 func _physics_process(delta):
@@ -41,7 +49,10 @@ func _physics_process(delta):
 		throw_kunai()
 	#	is_throwing()
 		lunge()
+		addmana()
+		use_mana()
 		move_and_slide(motion, UP)
+#		positionPlayer()
 		
 	
 #	print (jump_count)
@@ -133,7 +144,31 @@ func slash():
 			
 			timeout = true
 		
-		
+var man = 100
+func addmana():
+	if Input.is_action_just_pressed("harm"):
+		mana = man
+		GameData.update_mana(mana)
+		mana = 0
+#		print ("mana")
+
+func positionPlayer(X,Y):
+#	print (global_position.y)
+	print (X, "  ", Y)
+	global_position.x = X
+	global_position.y = Y
+#	newY = Y
+	
+
+
+	
+func position_update():
+	var X 
+	var Y 
+	X = global_position.x
+	Y = global_position.y 
+	GameData.update_position(X,Y)
+
 func throw_kunai():
 	if Input.is_action_just_pressed("kunai"):
 		
@@ -254,7 +289,17 @@ func dead():
 #	if Input.is_action_just_pressed("harm"):
 #		health -= damage
 
+func use_mana():
+	if Input.is_action_just_pressed("health"):
+		GameData.use_mana(1)
+	elif Input.is_action_just_pressed("slash_wave"):
+		GameData.use_mana(2)
 
+func restore_health():
+	health = max_health
+
+func slashW():
+	pass
 
 func _on_Animations_animation_finished():
 	

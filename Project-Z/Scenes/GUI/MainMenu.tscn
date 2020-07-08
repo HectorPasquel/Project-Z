@@ -201,5 +201,6 @@ stream = ExtResource( 7 )
 volume_db = -27.262
 autoplay = true
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer4/Exit" to="." method="_on_Exit_pressed"]
