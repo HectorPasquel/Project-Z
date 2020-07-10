@@ -23,6 +23,7 @@ func _physics_process(delta):
 	move_and_slide(motion, UP)
 	walk()
 	slash()
+
 #	print (direction)
 	
 func apply_gravity():
@@ -61,8 +62,9 @@ func dead():
 	is_dead = true
 	motion = Vector2(0,0)
 	$AnimatedSprite.play("dying")
-	
+	leave_mana()
 	$Dying.start()
+	
 #	$AnimatedSprite.play("dead")
 
 
@@ -178,6 +180,13 @@ func slash():
 		#		pass
 
 
+
+
+const MANA = preload("res://Scenes/Items/Mana.tscn")
+func leave_mana():
+	var mana = MANA.instance()
+	get_parent().add_child(mana)
+	mana.position = $PositionMana.global_position
 
 func _on_Vanish_timeout():
 	queue_free()
