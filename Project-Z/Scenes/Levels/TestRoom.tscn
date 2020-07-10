@@ -1,11 +1,11 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Enemy1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Levels/NewTiles2.tres" type="TileSet" id=3]
-[ext_resource path="res://GFX/HUD/HealthBarv2/sprite_1.png" type="Texture" id=4]
-[ext_resource path="res://GFX/HUD/HealthBarv2/sprite_health0.png" type="Texture" id=5]
-[ext_resource path="res://GFX/HUD/HealthBarv2/sprite_health1.png" type="Texture" id=6]
+[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_mana0.png" type="Texture" id=4]
+[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_mana1.png" type="Texture" id=5]
+[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_life1.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/Levels/LifeBar.gd" type="Script" id=7]
 [ext_resource path="res://GFX/Background/forest (1)/l5_sprite_1.png" type="Texture" id=8]
 [ext_resource path="res://GFX/Background/forest (1)/l4_sprite_1.png" type="Texture" id=9]
@@ -27,10 +27,13 @@
 [ext_resource path="res://Scenes/Enemies/Enemy4.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/GUI/Pause.tscn" type="PackedScene" id=26]
 [ext_resource path="res://SFX/Sao_Meo_Orchestral_Mix.wav" type="AudioStream" id=27]
-[ext_resource path="res://GFX/HUD/HealthBarv2/sprite_health2.png" type="Texture" id=28]
+[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_life2.png" type="Texture" id=28]
 [ext_resource path="res://Scenes/Levels/TestRoom.gd" type="Script" id=29]
 [ext_resource path="res://Scenes/GUI/MiniMap.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/GUI/SavePoint.tscn" type="PackedScene" id=31]
+[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_arc2.png" type="Texture" id=32]
+[ext_resource path="res://Scenes/Levels/ManaBar.gd" type="Script" id=33]
+[ext_resource path="res://Scenes/Enemies/Enemy5.tscn" type="PackedScene" id=34]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.2109, 111.819 )
@@ -64,23 +67,41 @@ position = Vector2( -1953.19, 498.798 )
 [node name="Enemy4" parent="." instance=ExtResource( 25 )]
 position = Vector2( -2792.2, 526.584 )
 
+[node name="Enemy5" parent="." instance=ExtResource( 34 )]
+position = Vector2( -4072.99, 463.936 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 961.874, 90.611 )
+position = Vector2( 975.567, 90.3257 )
+scale = Vector2( 0.8, 1 )
 z_index = 1
-texture = ExtResource( 4 )
+texture = ExtResource( 32 )
 
 [node name="LifeBar" type="TextureProgress" parent="CanvasLayer"]
-margin_left = 902.109
-margin_top = 48.7613
-margin_right = 1094.11
-margin_bottom = 240.762
-texture_under = ExtResource( 6 )
+margin_left = 927.705
+margin_top = 46.9055
+margin_right = 1119.71
+margin_bottom = 238.906
+rect_scale = Vector2( 0.8, 1.025 )
 texture_over = ExtResource( 28 )
-texture_progress = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
 fill_mode = 3
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaBar" type="TextureProgress" parent="CanvasLayer"]
+margin_left = 907.237
+margin_top = 53.4911
+margin_right = 1075.24
+margin_bottom = 221.491
+rect_scale = Vector2( 0.8, 1.025 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+script = ExtResource( 33 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

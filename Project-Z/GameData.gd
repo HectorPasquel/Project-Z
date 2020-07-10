@@ -31,7 +31,11 @@ func update_mana(man):
 	if man == -1:
 		mana = 0
 	else:
-		mana = mana + man
+		if mana < 100:
+			mana = mana + man
+		else:
+			mana = mana
+	print (mana)
 	
 func update_position(X,Y):
 	if X == -1 and Y == -1:
@@ -48,13 +52,13 @@ func position_player():
 
 func use_mana(value):
 	if value == 1:
-		if mana >= 500:
+		if mana >= 30:
 			get_tree().call_group("Player","restore_health")
-			mana = mana - 500
+			mana = mana - 30
 	elif value == 2:
-		if mana >= 300:
+		if mana >= 20:
 			get_tree().call_group("Player", "slashW")
-			mana = mana - 300
+			mana = mana - 20
 
 
 

@@ -17,6 +17,8 @@ var damageSword = 25
 var delayK = false
 
 const KUNAI = preload("res://Scenes/Items/kunai.tscn")
+const MANA = preload("res://Scenes/Items/Mana.tscn")
+
 
 func _ready():
 	pass 
@@ -26,6 +28,7 @@ func _physics_process(delta):
 	move_and_slide(motion, UP)
 	walk()
 	slash()
+	
 #	print (direction)
 	
 func apply_gravity():
@@ -67,6 +70,8 @@ func dead():
 	$AnimatedSprite.play("dying")
 	
 	$Dying.start()
+	leave_mana()
+	
 #	$AnimatedSprite.play("dead")
 
 
@@ -95,6 +100,13 @@ func harm(damage):
 #	get_parent().add_child(kunai)
 #	kunai.position = $Position2D.global_position
 #
+
+func leave_mana():
+	var mana = MANA.instance()
+	get_parent().add_child(mana)
+	mana.position = $PositionMana.global_position
+
+	
 func slash():
 #	if Input.is_action_just_pressed("harm"):
 	if is_dead == false:
@@ -225,6 +237,7 @@ func _on_Dying_timeout():
 	$CollisionShape2D.disabled = true
 	$AnimatedSprite.play("dead")
 	$Vanish.start()
+	
 
 
 func _on_hurt_timeout():

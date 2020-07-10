@@ -1,0 +1,127 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_02.png" type="Texture" id=1]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_01.png" type="Texture" id=2]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_04.png" type="Texture" id=3]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_06.png" type="Texture" id=4]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_03.png" type="Texture" id=5]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_09.png" type="Texture" id=6]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_00.png" type="Texture" id=7]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_08.png" type="Texture" id=8]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_11.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Enemies/Enemy5.gd" type="Script" id=10]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_12.png" type="Texture" id=11]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_05.png" type="Texture" id=12]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_10.png" type="Texture" id=14]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_13.png" type="Texture" id=15]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/dead.png" type="Texture" id=16]
+[ext_resource path="res://GFX/Enemies/Onryo Bansho/sprite_16.png" type="Texture" id=17]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "dying",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "attack",
+"speed": 18.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 30.5565, 77.4285 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 53.1098, 87.0672 )
+
+[node name="Enemy5" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 3.94086, 2.03907 )
+frames = SubResource( 1 )
+animation = "attack"
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -8.34138, 42.6775 )
+shape = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 20.9515, 115.342 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 2
+
+[node name="Vanish" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Dying" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="hurt" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="AtackArea" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AtackArea"]
+position = Vector2( 75.9781, 21.3797 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="attacking" type="Timer" parent="."]
+wait_time = 0.8
+
+[node name="viewR" type="RayCast2D" parent="."]
+position = Vector2( 14, 26 )
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 60 )
+
+[node name="viewL" type="RayCast2D" parent="."]
+position = Vector2( -14, 26 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 60 )
+
+[node name="collisionA" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="delay" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
+
+[node name="PositionMana" type="Position2D" parent="."]
+position = Vector2( -7.72696, 33.5987 )
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="Vanish" to="." method="_on_Vanish_timeout"]
+[connection signal="timeout" from="Dying" to="." method="_on_Dying_timeout"]
+[connection signal="timeout" from="hurt" to="." method="_on_hurt_timeout"]
+[connection signal="body_entered" from="AtackArea" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="attacking" to="." method="_on_attacking_timeout"]
+[connection signal="timeout" from="collisionA" to="." method="_on_collisionA_timeout"]
+[connection signal="timeout" from="delay" to="." method="_on_delay_timeout"]

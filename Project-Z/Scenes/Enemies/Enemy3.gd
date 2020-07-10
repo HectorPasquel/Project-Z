@@ -63,6 +63,7 @@ func dead():
 	$AnimatedSprite.play("dying")
 	
 	$Dying.start()
+	leave_mana()
 #	$AnimatedSprite.play("dead")
 
 
@@ -80,6 +81,14 @@ func harm(damage):
 	$AnimatedSprite.play("hurt")
 	if health < 1:
 		dead()
+		
+		
+		
+const MANA = preload("res://Scenes/Items/Mana.tscn")
+func leave_mana():
+	var mana = MANA.instance()
+	get_parent().add_child(mana)
+	mana.position = $PositionMana.global_position
 		
 		
 func slash():

@@ -8,6 +8,10 @@ const UP = Vector2(0,-1)
 const JUMP_SPEED = -1200
 const KUNAI = preload("res://Scenes/Items/kunai.tscn")
 
+
+const MANA = preload("res://Scenes/Items/Mana.tscn")
+
+
 var jump_count = 0
 var attacking = false
 var timeout = false
@@ -49,7 +53,7 @@ func _physics_process(delta):
 		throw_kunai()
 	#	is_throwing()
 		lunge()
-		addmana()
+		prueba()
 		use_mana()
 		move_and_slide(motion, UP)
 #		positionPlayer()
@@ -144,13 +148,13 @@ func slash():
 			
 			timeout = true
 		
-var man = 100
-func addmana():
-	if Input.is_action_just_pressed("harm"):
-		mana = man
-		GameData.update_mana(mana)
-		mana = 0
-#		print ("mana")
+#var man = 100
+func addmana(man):
+#	if Input.is_action_just_pressed("harm"):
+	mana = man
+	GameData.update_mana(mana)
+	mana = 0
+#	print ("mana")
 
 func positionPlayer(X,Y):
 #	print (global_position.y)
@@ -193,6 +197,13 @@ func throw_kunai():
 			$kunai.play()
 			$Timer.start()
 			timeout = true
+			
+			
+func prueba():
+	if Input.is_action_just_pressed("harm"):
+		var test = MANA.instance()
+		get_parent().add_child(test)
+		test.position = $Position2D.global_position
 			
 		
 			
