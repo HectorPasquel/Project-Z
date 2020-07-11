@@ -1,7 +1,7 @@
 extends Node
 
 var mana = 0
-var max_health = 100
+var max_health = 10
 var checkpoint = 1
 var positionX = 0
 var positionY = 0
@@ -25,7 +25,18 @@ func _ready():
 
 
 func update_max_health(max_h):
-	max_health = max_h
+	if max_h == -1:
+		max_health = 10
+		
+	else:
+		max_health = max_health + max_h
+#		llenar vida a tope (pendiente)
+		
+	
+func max_health_display():
+	get_tree().call_group("LifeBar", "process", max_health)
+	
+	
 	
 func update_mana(man):
 	if man == -1:
@@ -53,7 +64,7 @@ func position_player():
 func use_mana(value):
 	if value == 1:
 		if mana >= 30:
-			get_tree().call_group("Player","restore_health")
+			get_tree().call_group("Player","restore_health", max_health)
 			mana = mana - 30
 	elif value == 2:
 		if mana >= 20:
@@ -65,10 +76,9 @@ func use_mana(value):
 
 
 
-
 func _input(event):
 	if event.is_action_pressed("mock"):
-		print (positionX, "  ", positionY)
+		print (max_health)
 		
 		
 		
