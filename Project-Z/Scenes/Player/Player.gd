@@ -20,8 +20,8 @@ var wall_jumping = false
 var throwing = false
 var flashing = false
 var damage = 3
-var max_health = 100
-var health = 100
+
+var health = 10
 var is_hurted = false
 var dead = false
 var running = false
@@ -34,6 +34,7 @@ onready var right_wall = $WallRaycast/RightCast
 
 
 var mana = 0
+#var max_health = 100
 
 func _ready():
 	add_to_group("Player")
@@ -306,8 +307,14 @@ func use_mana():
 	elif Input.is_action_just_pressed("slash_wave"):
 		GameData.use_mana(2)
 
-func restore_health():
-	health = max_health
+func restore_health(max_h):
+	health = max_h
+	
+	
+
+	
+	
+	
 
 func slashW():
 	pass
