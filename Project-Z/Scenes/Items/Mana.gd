@@ -13,8 +13,8 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_Mana_body_entered(body):
 	if "Player" in body.name:
-		body.addmana(5)
-		GameData.update_max_health(2)
+		body.addmana(1)
+		
 	queue_free()
 
 

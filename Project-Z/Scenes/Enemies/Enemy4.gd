@@ -13,7 +13,7 @@ var direction = 1
 var health = 9
 var timeout = false
 var attacking = false
-var damageSword = 25
+var damageSword = 2
 var delayK = false
 
 const KUNAI = preload("res://Scenes/Items/kunai.tscn")
