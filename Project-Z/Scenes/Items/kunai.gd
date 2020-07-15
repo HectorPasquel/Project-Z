@@ -33,6 +33,10 @@ func _on_kunai_body_entered(body):
 		body.harm(damage)
 	elif "Enemy5" in body.name:
 		body.harm(damage)
+	elif "Enemy6" in body.name:
+		body.harm(damage)
+	elif "Araña" in body.name:
+		body.harm(damage)
 	elif "Player" in body.name:
 		body.harm(damage)
 	queue_free()

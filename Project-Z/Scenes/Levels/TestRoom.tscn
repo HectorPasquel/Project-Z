@@ -1,12 +1,11 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Enemy1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Levels/NewTiles2.tres" type="TileSet" id=3]
-[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_mana0.png" type="Texture" id=4]
-[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_mana1.png" type="Texture" id=5]
-[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_life1.png" type="Texture" id=6]
-[ext_resource path="res://Scenes/Levels/LifeBar.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Items/HealthRock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Items/ManaRock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Items/HealthRock2.tscn" type="PackedScene" id=6]
 [ext_resource path="res://GFX/Background/forest (1)/l5_sprite_1.png" type="Texture" id=8]
 [ext_resource path="res://GFX/Background/forest (1)/l4_sprite_1.png" type="Texture" id=9]
 [ext_resource path="res://GFX/Background/forest (1)/l2_sprite_1.png" type="Texture" id=10]
@@ -27,13 +26,15 @@
 [ext_resource path="res://Scenes/Enemies/Enemy4.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/GUI/Pause.tscn" type="PackedScene" id=26]
 [ext_resource path="res://SFX/Sao_Meo_Orchestral_Mix.wav" type="AudioStream" id=27]
-[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_life2.png" type="Texture" id=28]
+[ext_resource path="res://Scenes/Items/HealthRock3.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Levels/TestRoom.gd" type="Script" id=29]
 [ext_resource path="res://Scenes/GUI/MiniMap.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/GUI/SavePoint.tscn" type="PackedScene" id=31]
-[ext_resource path="res://GFX/HUD/lifev2 (7)/sprite_arc2.png" type="Texture" id=32]
-[ext_resource path="res://Scenes/Levels/ManaBar.gd" type="Script" id=33]
+[ext_resource path="res://Scenes/Items/ManaRock2.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scenes/Items/ManaRock3.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/Enemies/Enemy5.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Scenes/GUI/gui.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Scenes/Enemies/Araña.tscn" type="PackedScene" id=36]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.2109, 111.819 )
@@ -69,42 +70,6 @@ position = Vector2( -2792.2, 526.584 )
 
 [node name="Enemy5" parent="." instance=ExtResource( 34 )]
 position = Vector2( -4072.99, 463.936 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Sprite" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 975.567, 90.3257 )
-scale = Vector2( 0.8, 1 )
-z_index = 1
-texture = ExtResource( 32 )
-
-[node name="LifeBar" type="TextureProgress" parent="CanvasLayer"]
-margin_left = 927.705
-margin_top = 46.9055
-margin_right = 1119.71
-margin_bottom = 238.906
-rect_scale = Vector2( 0.8, 1.025 )
-texture_over = ExtResource( 28 )
-texture_progress = ExtResource( 6 )
-fill_mode = 3
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ManaBar" type="TextureProgress" parent="CanvasLayer"]
-margin_left = 907.237
-margin_top = 53.4911
-margin_right = 1075.24
-margin_bottom = 221.491
-rect_scale = Vector2( 0.8, 1.025 )
-texture_over = ExtResource( 5 )
-texture_progress = ExtResource( 4 )
-fill_mode = 3
-script = ExtResource( 33 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" type="Node" parent="."]
 
@@ -296,6 +261,29 @@ position = Vector2( 5825.72, 0.00012207 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="checkpoints/Room3"]
 position = Vector2( 7590.42, 541.024 )
 shape = SubResource( 1 )
+
+[node name="CanvasLayer3" parent="." instance=ExtResource( 35 )]
+
+[node name="HealthRock" parent="." instance=ExtResource( 4 )]
+position = Vector2( 6917.64, 291.234 )
+
+[node name="HealthRock2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 7498.74, 290.912 )
+
+[node name="ManaRock" parent="." instance=ExtResource( 5 )]
+position = Vector2( 6745.1, 313.468 )
+
+[node name="HealthRock3" parent="." instance=ExtResource( 28 )]
+position = Vector2( 7836.54, 292.997 )
+
+[node name="ManaRock2" parent="." instance=ExtResource( 32 )]
+position = Vector2( 8408.33, 314 )
+
+[node name="ManaRock3" parent="." instance=ExtResource( 33 )]
+position = Vector2( 8123.48, 314.424 )
+
+[node name="Araña" parent="." instance=ExtResource( 36 )]
+position = Vector2( -4684.64, 570.725 )
 [connection signal="body_entered" from="checkpoints/Room1" to="." method="_on_Room1_body_entered"]
 [connection signal="body_entered" from="checkpoints/Room2" to="." method="_on_Room2_body_entered"]
 [connection signal="body_entered" from="checkpoints/Room3" to="." method="_on_Room3_body_entered"]

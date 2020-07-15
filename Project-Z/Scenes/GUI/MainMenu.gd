@@ -36,6 +36,10 @@ func _on_TextureButton_pressed():
 	get_tree().change_scene("res://Scenes/Levels/TestRoom.tscn")
 	GameData.update_mana(-1)
 	GameData.update_position(-1, -1)
+	GameData.update_max_health(-1)
+	GameData.update_max_mana(-1)
+	GameData.update_health_stone(-1)
+	GameData.update_mana_stone(-1)
 #	GameData.position_player()
 
 

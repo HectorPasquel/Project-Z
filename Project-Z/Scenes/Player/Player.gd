@@ -338,9 +338,24 @@ func _on_TimerSlash_timeout():
 
 
 func _on_AtackArea_body_entered(body):
-	if "Enemy" in body.name:
+#	if "Enemy" in body.name:
+#		body.harm(damage)
+#	elif "Rastrillo" in body.name:
+#		body.harm(damage)
+		
+	if "Enemy1" in body.name:
 		body.harm(damage)
-	elif "Rastrillo" in body.name:
+	elif "Enemy2" in body.name:
+		body.harm(damage)
+	elif "Enemy3" in body.name:
+		body.harm(damage)
+	elif "Enemy4" in body.name:
+		body.harm(damage)
+	elif "Enemy5" in body.name:
+		body.harm(damage)
+	elif "Enemy6" in body.name:
+		body.harm(damage)
+	elif "Araña" in body.name:
 		body.harm(damage)
 
 

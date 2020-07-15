@@ -13,7 +13,7 @@ var direction = 1
 var health = 12
 var timeout = false
 var attacking = false
-var damageSword = 25
+var damageSword = 2
 
 func _ready():
 	pass 
