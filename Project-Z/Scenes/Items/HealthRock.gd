@@ -33,6 +33,7 @@ func _on_HealthRock_body_entered(body):
 			$Sprite2.visible = true
 			$Timer.start()
 			timeout = false
+			get_tree().call_group("Player", "green")
 		else:
 			pass
 		

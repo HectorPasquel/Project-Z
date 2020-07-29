@@ -215,9 +215,9 @@ func lunge():
 			$Animations.play("flash")
 			flashing = true
 			if $Animations.flip_h == false:
-				motion.x += 10000			
+				motion.x += 15000			
 			else:
-				motion.x -= 10000
+				motion.x -= 15000
 			$Timer.start()
 			timeout = true
 		
@@ -309,9 +309,24 @@ func use_mana():
 
 func restore_health(max_h):
 	health = max_h
+	red()
 	
 	
-
+func display_H():
+	get_tree().call_group("GUI", "dis_h", health)
+	
+	
+func red():
+	$AnimatedSprite.visible = true
+	$AnimatedSprite.play("red")
+	
+func blue():
+	$AnimatedSprite.visible = true
+	$AnimatedSprite.play("blue")
+	
+func green():
+	$AnimatedSprite.visible = true
+	$AnimatedSprite.play("green")
 	
 	
 	
@@ -365,3 +380,7 @@ func _on_run_finished():
 
 func _on_TimerToMenu_timeout():
 	get_tree().change_scene("res://Scenes/GUI/Restart.tscn")
+
+
+func _on_AnimatedSprite_animation_finished():
+	$AnimatedSprite.visible = false

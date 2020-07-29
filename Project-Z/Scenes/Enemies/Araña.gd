@@ -43,6 +43,7 @@ func walk():
 				direction = direction * -1
 				$RayCast2D.position.x *= -1
 				$CollisionShape2D.position.x *= -1
+				$Area2D/CollisionShape2D.position.x *= -1
 			motion.x = SPEED * direction
 			if direction == 1:
 				$AnimatedSprite.play("walk")
@@ -54,6 +55,7 @@ func walk():
 				direction = direction * -1
 				$RayCast2D.position.x *= -1
 				$CollisionShape2D.position.x *= -1
+				$Area2D/CollisionShape2D.position.x *= -1
 
 func dead():
 	
@@ -62,6 +64,8 @@ func dead():
 	$AnimatedSprite.play("dying")
 	leave_mana()
 	$Dying.start()
+	$CollisionShape2D.disabled = true
+	$Area2D/CollisionShape2D.disabled = true
 	
 #	$AnimatedSprite.play("dead")
 
