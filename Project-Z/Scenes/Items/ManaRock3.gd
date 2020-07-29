@@ -34,6 +34,7 @@ func _on_ManaRock_body_entered(body):
 			$Sprite2.visible = true
 			$Timer.start()
 			timeout = false
+			get_tree().call_group("Player", "blue")
 		else:
 			pass
 		

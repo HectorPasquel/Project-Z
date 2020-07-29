@@ -40,6 +40,7 @@ func _on_TextureButton_pressed():
 	GameData.update_max_mana(-1)
 	GameData.update_health_stone(-1)
 	GameData.update_mana_stone(-1)
+	GameData.update_G(-1)
 #	GameData.position_player()
 
 

@@ -20,10 +20,11 @@ func _ready():
 
 var mock = 0
 var mock_M = 0
-
+var health
 
 func _physics_process(delta):
-	var health = get_tree().root.get_node("TestRoom").get_node("Player").health
+#	var health = get_tree().root.get_node("Player").health
+	get_tree().call_group("Player", "display_H")
 	GameData.max_health_display()
 	var mana = get_tree().root.get_node("GameData").mana
 	
@@ -36,6 +37,8 @@ func _physics_process(delta):
 	
 	
 	
+func dis_h(H):
+	health = H
 
 func process(max_h, max_m):
 	mock_M = max_m

@@ -17,6 +17,11 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "walk",
@@ -26,18 +31,13 @@ animations = [ {
 "loop": true,
 "name": "dead",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "hurt",
-"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 49.4161, 14.482 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 70.9665, 29.8398 )
+extents = Vector2( 59.4731, 29.8398 )
 
 [node name="Araña" type="KinematicBody2D"]
 position = Vector2( 1.71472, 1.08072 )
@@ -56,7 +56,7 @@ position = Vector2( 7.20279, 18.9212 )
 shape = SubResource( 2 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 68.7458, 27.4148 )
+position = Vector2( 62.256, 26.5774 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 collision_mask = 2

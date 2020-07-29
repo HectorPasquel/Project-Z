@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://GFX/Environment/pasquel/sprite_02.png" type="Texture" id=1]
 [ext_resource path="res://GFX/Environment/pasquel/sprite_03.png" type="Texture" id=2]
@@ -9,9 +9,22 @@
 [ext_resource path="res://GFX/Environment/pasquel/sprite_08.png" type="Texture" id=7]
 [ext_resource path="res://GFX/Environment/pasquel/sprite_09.png" type="Texture" id=8]
 [ext_resource path="res://GFX/Environment/pasquel/sprite_07.png" type="Texture" id=9]
+[ext_resource path="res://GFX/Environment/pasquel (1)/sprite_floor16.png" type="Texture" id=10]
+[ext_resource path="res://GFX/Environment/pasquel (1)/sprite_floor13.png" type="Texture" id=11]
+[ext_resource path="res://GFX/Environment/pasquel (1)/sprite_floor15.png" type="Texture" id=12]
+[ext_resource path="res://GFX/Environment/pasquel (1)/sprite_floor11.png" type="Texture" id=13]
+[ext_resource path="res://GFX/Environment/pasquel (1)/sprite_floor05.png" type="Texture" id=14]
+[ext_resource path="res://GFX/Environment/pasquel (1)/sprite_floor04.png" type="Texture" id=15]
+[ext_resource path="res://GFX/Environment/pasquel (1)/sprite_floor12.png" type="Texture" id=16]
+[ext_resource path="res://GFX/Environment/pasquel (1)/sprite_floor18.png" type="Texture" id=17]
+[ext_resource path="res://GFX/Environment/pasquel/sprite_00.png" type="Texture" id=18]
+[ext_resource path="res://GFX/Environment/pasquel (1)/sprite_floor17.png" type="Texture" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.9717, 32.0192 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 31.9678, 17.0468 )
 
 [node name="TileMap" type="Node2D"]
 
@@ -104,3 +117,105 @@ collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt4/StaticBody2D3"]
 shape = SubResource( 1 )
+
+[node name="Dirt5" type="Sprite" parent="."]
+position = Vector2( 378.573, 188.951 )
+texture = ExtResource( 15 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt5"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt5/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="Dirt6" type="Sprite" parent="."]
+position = Vector2( 184.72, 224.789 )
+texture = ExtResource( 14 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt6"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt6/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="Dirt7" type="Sprite" parent="."]
+position = Vector2( 83.7204, 221.531 )
+texture = ExtResource( 13 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt7"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt7/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="Dirt8" type="Sprite" parent="."]
+position = Vector2( 3.89832, 214.2 )
+texture = ExtResource( 16 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt8"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt8/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="Dirt9" type="Sprite" parent="."]
+position = Vector2( -92.214, 216.644 )
+texture = ExtResource( 11 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt9"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt9/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="Dirt10" type="Sprite" parent="."]
+position = Vector2( -78.5297, 332.434 )
+texture = ExtResource( 12 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt10"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt10/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="Dirt11" type="Sprite" parent="."]
+position = Vector2( 63.5688, 344.711 )
+texture = ExtResource( 17 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt11"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt11/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="Dirt14" type="Sprite" parent="."]
+position = Vector2( -58.0455, 444.019 )
+texture = ExtResource( 18 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt14"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt14/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="Dirt12" type="Sprite" parent="."]
+position = Vector2( 224.049, 340.259 )
+texture = ExtResource( 10 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt12"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt12/StaticBody2D3"]
+position = Vector2( -0.0270691, 14.8935 )
+shape = SubResource( 2 )
+
+[node name="Dirt13" type="Sprite" parent="."]
+position = Vector2( 318.236, 339.378 )
+texture = ExtResource( 19 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dirt13"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt13/StaticBody2D3"]
+position = Vector2( -0.0270691, -15.0352 )
+shape = SubResource( 2 )
