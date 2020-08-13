@@ -142,10 +142,10 @@ script = ExtResource( 12 )
 [node name="Animations" type="AnimatedSprite" parent="."]
 position = Vector2( 0.275849, -13.2775 )
 frames = SubResource( 1 )
-animation = "attack"
-frame = 2
+animation = "idle"
 
 [node name="CollisionPlayer" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.341007, 21.4756 )
 shape = SubResource( 2 )
 
@@ -202,6 +202,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="AtackArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AtackArea"]
 position = Vector2( 33.1191, 1.77658 )
@@ -220,6 +221,7 @@ stream = ExtResource( 29 )
 one_shot = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 2.17769, -19.4633 )
 frames = SubResource( 4 )
 animation = "blue"

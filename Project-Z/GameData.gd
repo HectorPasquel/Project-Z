@@ -19,6 +19,7 @@ var mana_stone_c = 0
 var double_jump = 0
 var dash = 0
 var wall_jump = 0
+var getsuga = 0
 
 
 var redStone = 0
@@ -44,7 +45,8 @@ var data = {
 	wall_jump = 0,
 	redStone = 0,
 	blueStone = 0,
-	greenStone = 0
+	greenStone = 0,
+	getsuga = 0
 }
 
 
@@ -55,6 +57,35 @@ func _ready():
 		path.make_dir("user://jakon_saves")
 	
 	add_to_group("GameData")
+
+
+func update_ability(ability):
+	if ability == -1:
+		double_jump = 0
+		wall_jump = 0
+		dash = 0
+		getsuga = 0
+	elif ability == 1:
+		double_jump = 1
+	elif ability == 2:
+		wall_jump = 1
+	elif ability == 3:
+		dash = 1
+	elif ability == 4:
+		getsuga = 1
+		
+func validate_DJ():
+	pass
+	
+func validate_WJ():
+	pass
+	
+func validate_Dash():
+	pass
+	
+func validate_Getsuga():
+	pass
+
 
 func update_G(gem):
 	if gem == -1:
@@ -73,11 +104,9 @@ func validate_RD():
 	get_tree().call_group("RedDoor", "validateG", redStone)
 	get_tree().call_group("GemRed", "validateG", redStone)
 
-
 func validate_BD():
 	get_tree().call_group("BlueDoor", "validateG", blueStone)
 	get_tree().call_group("GemBlue", "validateG", blueStone)
-	
 
 func validate_GD():
 	get_tree().call_group("GreenDoor", "validateG", greenStone)
@@ -225,9 +254,11 @@ func save_data():
 	saved_data.double_jump = double_jump
 	saved_data.dash = dash
 	saved_data.wall_jump = wall_jump
+	saved_data.getsuga = getsuga
 	saved_data.redStone = redStone
 	saved_data.greenStone = greenStone
 	saved_data.blueStone = blueStone
+	
 	
 	
 
@@ -275,6 +306,7 @@ func load_data():
 	double_jump = loaded_data.double_jump
 	dash = loaded_data.dash
 	wall_jump = loaded_data.wall_jump
+	getsuga = loaded_data.getsuga
 	
 	redStone = loaded_data.redStone
 	blueStone = loaded_data.blueStone
